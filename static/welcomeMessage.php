@@ -1,6 +1,8 @@
 <?php
-session_start(); // Avvia la sessione per accedere alle variabili di sessione
-include '../config.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Avvia la sessione solo se non è già attiva
+}
+include_once '../config.php';
 
 // Controlla se l'utente è loggato o registrato
 if (isset($_SESSION['username'])) {

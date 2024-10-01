@@ -1,7 +1,8 @@
+<!--/pages/login.php-->
 <?php
 session_start();
 $error = ""; // Inizializza la variabile dell'errore
-include '../config.php'; // Connessione al database
+include_once '../config.php'; // Connessione al database
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $inputUsername = $_POST['username'];
@@ -23,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Avvia la sessione e memorizza le informazioni dell'utente
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $row['username'];
+            $_SESSION['user_id'] = $row['id']; // Aggiungi questa linea per memorizzare l'ID utente
             header('Location: promemoria.php'); // Reindirizza all'area protetta
             exit; // Assicurati di terminare lo script dopo il redirect
         } else {

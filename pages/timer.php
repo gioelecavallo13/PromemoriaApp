@@ -1,3 +1,4 @@
+<!--/pages/timer.php-->
 <?php
 session_start(); // Avvia la sessione
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {

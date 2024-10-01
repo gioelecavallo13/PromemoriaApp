@@ -1,3 +1,4 @@
+<!--/static/header.php-->
 <?php
 $currentPage = basename($_SERVER['PHP_SELF']); // Ottiene il nome del file PHP corrente
 ?>

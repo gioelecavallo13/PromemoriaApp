@@ -1,3 +1,4 @@
+<!--authenticate.php-->
 <?php
 session_start();
 require 'config.php'; // Assicurati che il percorso sia corretto

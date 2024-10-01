@@ -12,13 +12,13 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL
 );
 
--- Creazione della tabella promemoria
-CREATE TABLE IF NOT EXISTS reminders (
+-- Creazione della tabella activities con note e status
+CREATE TABLE IF NOT EXISTS activities (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    note TEXT,
-    completed BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activity_name VARCHAR(255) NOT NULL,
+    note TEXT, -- Aggiunta della colonna note
+    activity_date DATETIME NOT NULL,
+    status ENUM('pending', 'completed') DEFAULT 'pending', -- Aggiunta della colonna status
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );

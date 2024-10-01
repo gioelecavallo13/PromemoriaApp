@@ -30,4 +30,43 @@ if ($result->num_rows == 0) {
         echo "Errore durante l'esecuzione del file setup.sql: " . $conn->error;
     }
 }
+
+// Funzione per aggiungere un promemoria
+function addReminder($userId, $title, $note) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO reminders (user_id, title, note) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $userId, $title, $note);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Funzione per ottenere i promemoria di un utente
+function getRemindersByUserId($userId) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM reminders WHERE user_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $reminders = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    return $reminders;
+}
+
+// Funzione per eliminare un promemoria
+function deleteReminder($reminderId) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM reminders WHERE id = ?");
+    $stmt->bind_param("i", $reminderId);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Funzione per aggiornare lo stato di un promemoria
+function updateReminderStatus($reminderId, $status) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE reminders SET completed = ? WHERE id = ?");
+    $stmt->bind_param("ii", $status, $reminderId);
+    $stmt->execute();
+    $stmt->close();
+}
 ?>
